@@ -1,6 +1,6 @@
 import Left from "./bar/Left"
 import Center from "./bar/Center"
-import Right from ".bar/Right"
+import Right from "./bar/Right"
 const time = Variable('', {
     poll: [1000, function() {
         return Date().toString()
