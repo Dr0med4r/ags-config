@@ -1,4 +1,3 @@
-
 const hyprland = await Service.import('hyprland')
 
 const dispatch = (ws: string | number) => hyprland.messageAsync(`dispatch workspace ${ws}`);
@@ -14,12 +13,12 @@ function workspacesOnMonitor(monitorId: number) {
         }))
 }
 
-const monitors = Array.
+const Monitors = () => Array.
     from({ length: hyprland.monitors.length }, (_, i) => i)
     .map(i => Widget.Box({
         css: 'margin-right: 1em;',
         children: workspacesOnMonitor(i),
-        setup: (self: Widget.Box) => self.hook(hyprland, () => self.children.forEach((btn: Widget.Button) => {
+        setup: (self) => self.hook(hyprland, () => self.children.forEach((btn) => {
             btn.visible = hyprland.workspaces.some(ws => ws.id === btn.attribute.workspace && ws.monitorID === btn.attribute.monitor);
         })),
     }))
@@ -28,6 +27,6 @@ export default () => Widget.EventBox({
     onScrollUp: () => dispatch('+1'),
     onScrollDown: () => dispatch('-1'),
     child: Widget.Box({
-        children: monitors,
+        children: Monitors(),
     }),
 })

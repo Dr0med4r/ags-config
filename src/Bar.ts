@@ -2,8 +2,8 @@ import Left from "./bar/Left"
 import Center from "./bar/Center"
 import Right from "./bar/Right"
 
-export default (/** @type {number} */ monitor: number) => Widget.Window({
-    monitor,
+export default (monitor: number) => Widget.Window({
+    monitor: monitor,
     name: `bar${monitor}`,
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
