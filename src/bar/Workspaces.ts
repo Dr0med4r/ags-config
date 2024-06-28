@@ -23,10 +23,13 @@ const Monitors = () => Array.
         })),
     }))
 
-export default () => Widget.EventBox({
+const Workspaces = () => Widget.EventBox({
     onScrollUp: () => dispatch('+1'),
     onScrollDown: () => dispatch('-1'),
     child: Widget.Box({
         children: Monitors(),
     }),
 })
+
+
+export default Workspaces 

@@ -1,4 +1,15 @@
-const Indicator = (props) =>
+import Box from "types/widgets/box";
+import Label from "types/widgets/label";
+
+type SystemInfo = {
+  type: string;
+  poll: (self: Label<unknown>) => void;
+  boxpoll: (self: Box<Label<unknown>,unknown>) => void;
+  label?: string;
+  tooltipText?: string;
+
+}
+const Indicator = (props: SystemInfo) =>
   Widget.Box({
     vertical: true,
     vexpand: true,
@@ -17,7 +28,7 @@ const Indicator = (props) =>
 const cpu = {
   type: "CPU",
 
-  poll: (self) =>
+  poll: (self: Label<unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -26,7 +37,7 @@ const cpu = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self) =>
+  boxpoll: (self: Box<Label<unknown>,unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -42,7 +53,7 @@ const cpu = {
 
 const ram = {
   type: "MEM",
-  poll: (self) =>
+  poll: (self: Label<unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -51,7 +62,7 @@ const ram = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self) =>
+  boxpoll: (self: Box<Label<unknown>,unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
