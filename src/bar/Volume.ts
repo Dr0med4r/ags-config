@@ -22,31 +22,54 @@ const AudioLabel = (type: Stream) => Widget.Label().hook(type, self => {
 })
 
 const SpeakerIcon = () => Widget.Icon().hook(audio.speaker, self => {
-    const vol = audio.speaker.volume * 100 * !audio.speaker.is_muted;
+    const vol = audio.speaker.volume * 100 * Number(!audio.speaker.is_muted);
     const icon = [
         [101, 'overamplified'],
         [67, 'high'],
         [34, 'medium'],
         [1, 'low'],
         [0, 'muted'],
-    ].find(([threshold]) => threshold <= vol)?.[1];
+    ].find(([threshold]) => Number(threshold) <= vol)?.[1];
 
     self.icon = `audio-volume-${icon}-symbolic`;
 })
 
 
-const MicrophoneLabel = () => Widget.Icon().hook(audio.microphone, self => {
-    const vol = audio.microphone.volume * 100 * !audio.microphone.is_muted;
+const MicrophoneIcon = () => Widget.Icon().hook(audio.microphone, self => {
+    const vol = audio.microphone.volume * 100 * Number(!audio.microphone.is_muted);
     const icon = [
         [67, 'high'],
         [34, 'medium'],
         [1, 'low'],
         [0, 'muted'],
-    ].find(([threshold]) => threshold <= vol)?.[1];
+    ].find(([threshold]) => Number(threshold) <= vol)?.[1];
 
     self.icon = `microphone-sensitivity-${icon}-symbolic`;
 })
 
+const SpeakerBox = () => Widget.EventBox({
+    className: "Speaker",
+    on_scroll_up: () => { audio["speaker"].volume += volumeChange },
+    on_scroll_down: () => { audio["speaker"].volume -= volumeChange },
+    child: Widget.Box({
+        children: [
+            AudioLabel(audio.speaker),
+            SpeakerIcon(),
+        ]
+    })
+})
+
+const MicrophoneBox = () => Widget.EventBox({
+    className: "Microphone",
+    on_scroll_up: () => { audio["microphone"].volume += volumeChange },
+    on_scroll_down: () => { audio["microphone"].volume -= volumeChange },
+    child: Widget.Box({
+        children: [
+            AudioLabel(audio.microphone),
+            MicrophoneIcon(),
+        ]
+    })
+})
 
 const VolumeIndicator = (monitor: number) => Widget.EventBox({
     className: "VolumeIndicator",
@@ -57,17 +80,15 @@ const VolumeIndicator = (monitor: number) => Widget.EventBox({
     on_secondary_click: () => {
         App.toggleWindow(`volume-menu${monitor}`)
     },
-    on_scroll_up: () => { audio["speaker"].volume += volumeChange },
-    on_scroll_down: () => { audio["speaker"].volume -= volumeChange },
     child: Widget.Box({
         children: [
-            AudioLabel(audio.speaker),
-            SpeakerIcon(),
-            AudioLabel(audio.microphone),
-            MicrophoneLabel(),
+            SpeakerBox(),
+            MicrophoneBox(),
         ]
     }),
 })
+
+
 
 export const VolumeControl = (monitor: number) => Widget.Window({
     monitor: monitor,
