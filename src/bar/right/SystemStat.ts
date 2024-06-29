@@ -11,6 +11,7 @@ type SystemInfo = {
 }
 const Indicator = (props: SystemInfo) =>
   Widget.Box({
+    className: `SystemInfo ${props.type}`,
     vertical: true,
     vexpand: true,
     vpack: "center",

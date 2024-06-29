@@ -1,0 +1,86 @@
+/*
+You can type here any CSS rule recognized by GTK+.
+You can temporarily disable this custom CSS by clicking on the “Pause” button above.
+
+Changes are applied instantly and globally, for the whole application.
+*/
+
+
+@define-color base00 #1a1b26; @define-color base01 #16161e; @define-color base02 #2f3549; @define-color base03 #444b6a;
+@define-color base04 #787c99; @define-color base05 #a9b1d6; @define-color base06 #cbccd1; @define-color base07 #d5d6db;
+
+@define-color base08 #c0caf5; @define-color base09 #a9b1d6; @define-color base0A #0db9d7; @define-color base0B #9ece6a;
+@define-color base0C #b4f9f8; @define-color base0D #2ac3de; @define-color base0E #bb9af7; @define-color base0F #f7768e;
+
+
+* {
+	background-image: none;
+	border: none;
+	box-shadow: none;
+}
+
+window {
+	background: transparent;
+}
+
+.VolumeControl {
+	border: 2px solid @base0D;
+	border-radius: 10px;
+	background-color: @base00;
+	min-width: 10em;
+}
+
+.VolumeControl trough {
+
+	margin: 1em;
+	min-width: 10em;
+	min-height: 10px;
+	background-color: @base01;
+}
+
+.VolumeControl trough highlight {
+	background-color: @base02
+}
+
+.VolumeControl trough slider {
+	min-width: 0px;
+	min-height: 0px;
+	background-color: @base07;
+}
+
+.Clock, .SystemInfo, .VolumeIndicator, .SystemTray {
+	background-color: @base00;
+	color: @base05;
+	padding: 0em 1em;
+	border-radius: 10px;
+	margin: 0em 5px;
+	border-radius: 10px;
+}
+
+.SystemTrayItem {
+	border-radius: 10px;
+	background-color: @base00;
+	color: @base05;
+	padding:0.1em;
+}
+
+.Workspaces > box > box {
+	background-color: @base00;
+	color: @base05;
+	border-radius: 10px;
+}
+
+.WorkspaceButton {
+	border-radius: 10px;
+	background-color: @base00;
+	color: @base05;
+	padding: 0em 0.75em;
+}
+
+button.active:not(:hover) {
+	box-shadow: inset 0 -3px @base05;
+}
+
+button:hover.WorkspaceButton {
+	box-shadow: inset 0 -3px @base06;
+}

@@ -1,25 +1,29 @@
 import Workspaces from "./bar/Workspaces"
-import VolumeIndicator, { VolumeControl } from "./bar/Volume"
+import VolumeIndicator from "./bar/Volume"
 import SystemStat from "./bar/right/SystemStat"
 import Systemtray from "./bar/right/Systemtray"
 import Clock from "./bar/Clock"
 
 
 
-const Left = () => Widget.Box({
+const Left = (monitor) => Widget.Box({
+    hpack: "start",
+    className: "Left",
     children: [
         Workspaces(),
     ],
 })
 
-const Center = () => Widget.Box({
-    children: [VolumeIndicator(),],
+const Center = (monitor: number) => Widget.Box({
+    className: "Center",
+    children: [VolumeIndicator(monitor),],
 })
 
 
 
-const Right = () => Widget.Box({
+const Right = (monitor) => Widget.Box({
     hpack: "end",
+    className: "Right",
     children: [
         SystemStat(),
         Clock(),
@@ -33,11 +37,8 @@ export default (monitor: number) => Widget.Window({
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
     child: Widget.CenterBox({
-        start_widget: Left(),
-        center_widget: Center(),
-        end_widget: Right(),
+        start_widget: Left(monitor),
+        center_widget: Center(monitor),
+        end_widget: Right(monitor),
     }),
-    setup: () => {
-        App.add_window(VolumeControl(monitor))
-    },
 })
