@@ -12,6 +12,7 @@ Changes are applied instantly and globally, for the whole application.
 	background-image: none;
 	border: none;
 	box-shadow: none;
+	font-size: 13;
 }
 
 window {
@@ -46,7 +47,7 @@ window {
 .Clock, .SystemInfo, .VolumeIndicator, .SystemTray {
 	background-color: @base00;
 	color: @base05;
-	padding: 0em 1em;
+	padding: 0.5em 1em;
 	border-radius: 10px;
 	margin: 0em 5px;
 	border-radius: 10px;

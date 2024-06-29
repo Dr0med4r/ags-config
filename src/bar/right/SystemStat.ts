@@ -4,7 +4,7 @@ import Label from "types/widgets/label";
 type SystemInfo = {
   type: string;
   poll: (self: Label<unknown>) => void;
-  boxpoll: (self: Box<Label<unknown>,unknown>) => void;
+  boxpoll: (self: Box<Label<unknown>, unknown>) => void;
   label?: string;
   tooltipText?: string;
 
@@ -12,7 +12,6 @@ type SystemInfo = {
 const Indicator = (props: SystemInfo) =>
   Widget.Box({
     className: `SystemInfo ${props.type}`,
-    vertical: true,
     vexpand: true,
     vpack: "center",
 
@@ -27,7 +26,7 @@ const Indicator = (props: SystemInfo) =>
   }).poll(2000, props.boxpoll);
 
 const cpu = {
-  type: "CPU",
+  type: " ",
 
   poll: (self: Label<unknown>) =>
     Utils.execAsync([
@@ -38,22 +37,23 @@ const cpu = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self: Box<Label<unknown>,unknown>) =>
+  boxpoll: (self: Box<Label<unknown>, unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
       "lscpu --parse=MHZ",
     ])
       .then((r) => {
-        const mhz = r.split("\n").slice(4);
+        const mhz = r.split("\n").slice(4).map((value) => value.split(",")[0]);
         const freq = mhz.reduce((acc, e) => acc + Number(e), 0) / mhz.length;
         self.tooltipText = Math.round(freq) + " MHz";
       })
       .catch((err) => print(err)),
 };
 
+
 const ram = {
-  type: "MEM",
+  type: " ",
   poll: (self: Label<unknown>) =>
     Utils.execAsync([
       "sh",
@@ -63,7 +63,7 @@ const ram = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self: Box<Label<unknown>,unknown>) =>
+  boxpoll: (self: Box<Label<unknown>, unknown>) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -73,6 +73,24 @@ const ram = {
       .catch((err) => print(err)),
 };
 
+const temperature: SystemInfo = {
+  type: " ",
+  poll: (self: Label<unknown>) =>
+    Utils.execAsync([
+      "sh",
+      "-c",
+      `sensors 'coretemp-*' | awk '{print $3}' | head -4 | tail -1`,
+    ]).then((r) => {
+      self.label = r.slice(1);
+    })
+      .catch((err) => print(err)),
+
+  boxpoll: (self) => { },
+
+
+}
+
+
 export default () =>
   Widget.EventBox({
     onPrimaryClick: () => Utils.execAsync(["missioncenter"]),
@@ -81,6 +99,7 @@ export default () =>
       className: "system-info module",
 
       children: [
+        Indicator(temperature),
         Indicator(cpu),
         Indicator(ram),
       ],
