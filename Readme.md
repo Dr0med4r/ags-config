@@ -1,3 +1,0 @@
-- fix window only on one monitor 
-- add battery 
-- add network (with bluetooth)
