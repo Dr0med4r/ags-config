@@ -1,1 +1,4 @@
-- fix window only on one monitor (think about it maybe one for every monitor and put the windows down to the appconfig)
+- fix window only on one monitor 
+- add battery 
+- add temperature
+- add network (with bluetooth)
