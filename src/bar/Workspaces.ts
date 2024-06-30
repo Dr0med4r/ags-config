@@ -24,7 +24,7 @@ function workspacesOnMonitor(monitorId: number) {
 const Monitors = () => Array.
     from({ length: hyprland.monitors.length }, (_, i) => i)
     .map(i => Widget.Box({
-        className: `Workspaces monitor${i}`,
+        className: `WorkspacesOnMonitor monitor${i}`,
         css: 'margin-right: 1em;',
         children: workspacesOnMonitor(i),
         setup: (self) => self.hook(hyprland, () => self.children.forEach((btn) => {

@@ -49,6 +49,7 @@ const MicrophoneIcon = () => Widget.Icon().hook(audio.microphone, self => {
 
 const SpeakerBox = () => Widget.EventBox({
     className: "Speaker",
+    on_primary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
     on_scroll_up: () => { audio["speaker"].volume += volumeChange },
     on_scroll_down: () => { audio["speaker"].volume -= volumeChange },
     child: Widget.Box({
@@ -61,6 +62,7 @@ const SpeakerBox = () => Widget.EventBox({
 
 const MicrophoneBox = () => Widget.EventBox({
     className: "Microphone",
+    on_primary_click: () => audio.microphone.is_muted = !audio.microphone.is_muted,
     on_scroll_up: () => { audio["microphone"].volume += volumeChange },
     on_scroll_down: () => { audio["microphone"].volume -= volumeChange },
     child: Widget.Box({
@@ -71,21 +73,22 @@ const MicrophoneBox = () => Widget.EventBox({
     })
 })
 
-const VolumeIndicator = (monitor: number) => Widget.EventBox({
-    className: "VolumeIndicator",
-    css: "padding-left: 1em; padding-right: 1em;",
-    on_primary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
-    on_hover: () => App.openWindow(`volume-menu${monitor}`),
-    on_hover_lost: () => App.closeWindow(`volume-menu${monitor}`),
-    on_secondary_click: () => {
-        App.toggleWindow(`volume-menu${monitor}`)
-    },
-    child: Widget.Box({
-        children: [
-            SpeakerBox(),
-            MicrophoneBox(),
-        ]
-    }),
+const VolumeIndicator = (monitor: number) => Widget.Box({
+    child: Widget.EventBox({
+        className: "VolumeIndicator",
+        css: "padding-left: 1em; padding-right: 1em;",
+        on_hover: () => App.openWindow(`volume-menu${monitor}`),
+        on_hover_lost: () => App.closeWindow(`volume-menu${monitor}`),
+        on_secondary_click: () => {
+            App.toggleWindow(`volume-menu${monitor}`)
+        },
+        child: Widget.Box({
+            children: [
+                SpeakerBox(),
+                MicrophoneBox(),
+            ]
+        }),
+    })
 })
 
 
