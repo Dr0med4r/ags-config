@@ -11,9 +11,7 @@ Utils.monitorFile(`${App.configDir}`, () => {
 App.config({
     style: "./style.css",
     windows: [
-        Bar(1),
         Bar(0),
-        VolumeControl(1),
         VolumeControl(0),
         NetworkConfig(0),
     ],

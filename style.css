@@ -15,12 +15,37 @@
 .SystemInfo, 
 .VolumeIndicator, 
 .SystemTray,
+.NetworkConfig,
 .NetworkIndicator {
 	background-color: @base00;
 	color: @base05;
 	border-radius: 10px;
 	padding: 0.5em 1em;
 	margin: 0em 5px;
+}
+
+
+* > .ConnectionTypes {
+	padding: 0.5em;
+}
+.ConnectionTypes *{
+	padding: 0.2em;
+	margin: 0.1em;
+	border-radius: 10px;
+	background-color: @base02;
+}
+.WifiConnections {
+	min-height: 10em;
+	min-width: 20em;
+}
+.WifiSwitch {
+	background-color: @base02;
+}
+.WifiSwitch slider {
+	background-color: @base04;
+}
+.ScanButton {
+	background-color: @base02;
 }
 
 .Center > * {
@@ -33,7 +58,8 @@
 }
 
 
-.VolumeControl {
+.VolumeControl,
+.NetworkConfig {
 	border: 2px solid @base0D;
 	min-width: 10em;
 }
