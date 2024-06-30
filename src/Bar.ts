@@ -3,6 +3,7 @@ import VolumeIndicator from "./bar/Volume"
 import SystemStat from "./bar/right/SystemStat"
 import Systemtray from "./bar/right/Systemtray"
 import Clock from "./bar/Clock"
+import NetworkIndicator from "./bar/Network"
 
 
 
@@ -16,7 +17,10 @@ const Left = (monitor) => Widget.Box({
 
 const Center = (monitor: number) => Widget.Box({
     className: "Center",
-    children: [VolumeIndicator(monitor),],
+    children: [
+        VolumeIndicator(monitor),
+        NetworkIndicator(monitor),
+    ],
 })
 
 
