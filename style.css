@@ -1,10 +1,3 @@
-/*
-You can type here any CSS rule recognized by GTK+.
-You can temporarily disable this custom CSS by clicking on the “Pause” button above.
-
-Changes are applied instantly and globally, for the whole application.
-*/
-
 @import 'colors.css';
 
 
@@ -13,21 +6,39 @@ Changes are applied instantly and globally, for the whole application.
 	border: none;
 	box-shadow: none;
 	font-size: 13;
-}
-
-window {
 	background: transparent;
 }
 
+.VolumeControl,
+.Clock, 
+.WorkspacesOnMonitor,
+.SystemInfo, 
+.VolumeIndicator, 
+.SystemTray,
+.NetworkIndicator {
+	background-color: @base00;
+	color: @base05;
+	border-radius: 10px;
+	padding: 0.5em 1em;
+	margin: 0em 5px;
+}
+
+.Center > * {
+	margin: 0 5px;
+}
+
+.NetworkIndicator {
+	margin: 0;
+	padding: 0;
+}
+
+
 .VolumeControl {
 	border: 2px solid @base0D;
-	border-radius: 10px;
-	background-color: @base00;
 	min-width: 10em;
 }
 
 .VolumeControl trough {
-
 	margin: 1em;
 	min-width: 10em;
 	min-height: 10px;
@@ -44,32 +55,15 @@ window {
 	background-color: @base07;
 }
 
-.Clock, .SystemInfo, .VolumeIndicator, .SystemTray {
-	background-color: @base00;
-	color: @base05;
-	padding: 0.5em 1em;
-	border-radius: 10px;
-	margin: 0em 5px;
-	border-radius: 10px;
-}
+
 
 .SystemTrayItem {
-	border-radius: 10px;
-	background-color: @base00;
-	color: @base05;
 	padding:0.1em;
 }
 
-.Workspaces > box > box {
-	background-color: @base00;
-	color: @base05;
-	border-radius: 10px;
-}
+
 
 .WorkspaceButton {
-	border-radius: 10px;
-	background-color: @base00;
-	color: @base05;
 	padding: 0em 0.75em;
 }
 
@@ -80,3 +74,5 @@ button.active:not(:hover) {
 button:hover.WorkspaceButton {
 	box-shadow: inset 0 -3px @base06;
 }
+
+
