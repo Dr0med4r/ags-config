@@ -6,6 +6,8 @@
 	border: none;
 	box-shadow: none;
 	font-size: 13;
+}
+window {
 	background: transparent;
 }
 
@@ -16,7 +18,8 @@
 .VolumeIndicator, 
 .SystemTray,
 .NetworkConfig,
-.NetworkIndicator {
+.NetworkIndicator,
+tooltip {
 	background-color: @base00;
 	color: @base05;
 	border-radius: 10px;
@@ -24,8 +27,15 @@
 	margin: 0em 5px;
 }
 
+.VPNSwitch {
+	background-color: @base02;
+}
+.VPNSwitch:checked {
+	background-color: @base05;
+}
 
-* > .ConnectionTypes {
+* > .ConnectionTypes,
+* > .ConnectionSettings {
 	padding: 0.5em;
 }
 .ConnectionTypes *{
@@ -34,14 +44,14 @@
 	border-radius: 10px;
 	background-color: @base02;
 }
-.WifiConnections {
+.WifiConnections, .VPNConnections {
 	min-height: 10em;
 	min-width: 20em;
 }
-.WifiSwitch {
+switch {
 	background-color: @base02;
 }
-.WifiSwitch slider {
+switch slider {
 	background-color: @base04;
 }
 .ScanButton {

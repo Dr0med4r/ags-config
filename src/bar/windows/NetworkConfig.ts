@@ -1,20 +1,24 @@
-const network = await Service.import("network")
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
+import VPNSettings from "./NetworkConfig/VPNSettings";
+import WifiSettings from "./NetworkConfig/WifiSettings";
+
+
+const connectionType = Variable("wifi")
 
 const TypeOfConnection = () => Widget.CenterBox({
     className: "ConnectionTypes",
     startWidget: Widget.Button({
+        on_clicked: () => connectionType.value = "wifi",
         child: Widget.Label({ label: "Wifi" })
     }),
-    centerWidget: Widget.Button({
-        child: Widget.Label({ label: "Wired" })
-    }),
     endWidget: Widget.Button({
+        on_clicked: () => connectionType.value = "vpn",
         child: Widget.Label({ label: "VPN" })
     })
 })
 
-const WifiConnections = () => Widget.Scrollable({
-    className: "WifiConnections",
+export const Connections = (name: string, connections: () => Gtk.Widget[]) => Widget.Scrollable({
+    className: `${name}Connections`,
     vscroll: "always",
     hscroll: "never",
     child: Widget.Box({
@@ -24,64 +28,12 @@ const WifiConnections = () => Widget.Scrollable({
 })
 
 
-const WifiConnection = (access_point: {
-    bssid: string | null;
-    address: string | null;
-    lastSeen: number;
-    ssid: string | null;
-    active: boolean;
-    strength: number;
-    frequency: number;
-    iconName: string | undefined;
-}) => Widget.EventBox({
-    on_primary_click: () => {
-        access_point.active = true;
-        print("pressed")
-    },
-    child: Widget.Box({
-        className: "WifiConnection",
-        children: [
-            Widget.Icon({ icon: access_point.iconName }),
-            Widget.Label({ label: access_point.ssid }),
-        ]
-
-    }),
-})
-
-function connections() {
-    return network.wifi.access_points
-        .sort((ap1, ap2) => ap2.strength - ap1.strength)
-        .map(WifiConnection)
-}
-
-const WifiSettings = () => Widget.Box({
-    vertical: true,
-    children: [
-        Widget.Box({
-            children: [
-                Widget.Switch({
-                    className: "WifiSwitch",
-                    onActivate: () => network.toggleWifi(),
-                    setup: (self) => self.active = network.wifi.enabled,
-                }),
-                Widget.Label({label: "Toggle Wifi", css: "margin-left: 0.2em; margin-right: 2em;"}),
-                Widget.Button({
-                    className: "ScanButton",
-                    on_clicked: () => network.wifi.scan(),
-                    child: Widget.Label({ label: "Scan" })
-                })
-            ]
-        }),
-        WifiConnections(),
-    ]
-})
-
-
 const ConnectionSettings = () => Widget.Stack({
+    className: "ConnectionSettings",
+    shown: connectionType.bind().as((v) => v === "wifi" || v === "vpn"  ? v : "wifi"),
     children: {
         wifi: WifiSettings(),
-        // wired: WiredSettings(),
-        // vpn: VPNSettings(),
+        vpn: VPNSettings(),
     },
 
 })
