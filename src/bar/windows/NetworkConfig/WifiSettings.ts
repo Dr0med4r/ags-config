@@ -10,7 +10,7 @@ const WifiConnection = (access_point: Wifi["access_points"][number]) => Widget.E
         print("pressed")
     },
     child: Widget.Box({
-        className: "WifiConnection",
+        class_name: "WifiConnection",
         children: [
             Widget.Icon({ icon: access_point.iconName }),
             Widget.Label({ label: access_point.ssid }),
@@ -36,13 +36,13 @@ const WifiSettings = () => {
                 Widget.Box({
                     children: [
                         Widget.Switch({
-                            className: "WifiSwitch",
-                            onActivate: () => network.toggleWifi(),
+                            class_name: "WifiSwitch",
+                            on_activate: () => network.toggleWifi(),
                             active: network.wifi.bind("enabled"),
                         }),
                         Widget.Label({ label: "Toggle Wifi", css: "margin-left: 0.2em; margin-right: 2em;" }),
                         Widget.Button({
-                            className: "ScanButton",
+                            class_name: "ScanButton",
                             on_clicked: () => network.wifi.scan(),
                             child: Widget.Label({ label: "Scan" })
                         })

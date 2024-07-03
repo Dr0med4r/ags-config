@@ -9,14 +9,14 @@ import NetworkIndicator from "./bar/Network"
 
 const Left = (monitor) => Widget.Box({
     hpack: "start",
-    className: "Left",
+    class_name: "Left",
     children: [
         Workspaces(),
     ],
 })
 
 const Center = (monitor: number) => Widget.Box({
-    className: "Center",
+    class_name: "Center",
     children: [
         VolumeIndicator(monitor),
         NetworkIndicator(monitor),
@@ -27,7 +27,7 @@ const Center = (monitor: number) => Widget.Box({
 
 const Right = (monitor) => Widget.Box({
     hpack: "end",
-    className: "Right",
+    class_name: "Right",
     children: [
         SystemStat(),
         Clock(),

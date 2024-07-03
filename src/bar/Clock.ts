@@ -1,6 +1,6 @@
 
 const Clock = () => Widget.Label({
-    className: "Clock",
+    class_name: "Clock",
 })
     .poll(60000, self => {
         Utils.execAsync('date "+%d.%m %H:%M"')

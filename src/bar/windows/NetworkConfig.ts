@@ -6,19 +6,19 @@ import WifiSettings from "./NetworkConfig/WifiSettings";
 const connectionType = Variable("wifi")
 
 const TypeOfConnection = () => Widget.CenterBox({
-    className: "ConnectionTypes",
-    startWidget: Widget.Button({
+    class_name: "ConnectionTypes",
+    start_widget: Widget.Button({
         on_clicked: () => connectionType.value = "wifi",
         child: Widget.Label({ label: "Wifi" })
     }),
-    endWidget: Widget.Button({
+    end_widget: Widget.Button({
         on_clicked: () => connectionType.value = "vpn",
         child: Widget.Label({ label: "VPN" })
     })
 })
 
 export const Connections = (name: string, connections: () => Gtk.Widget[]) => Widget.Scrollable({
-    className: `${name}Connections`,
+    class_name: `${name}Connections`,
     vscroll: "always",
     hscroll: "never",
     child: Widget.Box({
@@ -29,7 +29,7 @@ export const Connections = (name: string, connections: () => Gtk.Widget[]) => Wi
 
 
 const ConnectionSettings = () => Widget.Stack({
-    className: "ConnectionSettings",
+    class_name: "ConnectionSettings",
     shown: connectionType.bind().as((v) => v === "wifi" || v === "vpn"  ? v : "wifi"),
     children: {
         wifi: WifiSettings(),
@@ -43,7 +43,7 @@ const NetworkConfig = (monitor: number) => Widget.Window({
     monitor,
     name: `networkConfig${monitor}`,
     anchor: ["top"],
-    className: "NetworkConfig",
+    class_name: "NetworkConfig",
     child: Widget.Box({
         vertical: true,
         children: [

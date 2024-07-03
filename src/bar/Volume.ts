@@ -5,10 +5,10 @@ const audio = await Service.import('audio')
 /** @param {'speaker' | 'microphone'} type */
 const VolumeSlider = (type: 'speaker' | 'microphone' = 'speaker') => Widget.Slider({
     css: "padding:1px;",
-    className: type,
+    class_name: type,
     hexpand: true,
-    drawValue: false,
-    onChange: ({ value }) => audio[type].volume = value,
+    draw_value: false,
+    on_change: ({ value }) => audio[type].volume = value,
     value: audio[type].bind('volume'),
 })
 
@@ -48,7 +48,7 @@ const MicrophoneIcon = () => Widget.Icon().hook(audio.microphone, self => {
 })
 
 const SpeakerBox = () => Widget.EventBox({
-    className: "Speaker",
+    class_name: "Speaker",
     on_primary_click: () => audio.speaker.is_muted = !audio.speaker.is_muted,
     on_scroll_up: () => { audio["speaker"].volume += volumeChange },
     on_scroll_down: () => { audio["speaker"].volume -= volumeChange },
@@ -61,7 +61,7 @@ const SpeakerBox = () => Widget.EventBox({
 })
 
 const MicrophoneBox = () => Widget.EventBox({
-    className: "Microphone",
+    class_name: "Microphone",
     on_primary_click: () => audio.microphone.is_muted = !audio.microphone.is_muted,
     on_scroll_up: () => { audio["microphone"].volume += volumeChange },
     on_scroll_down: () => { audio["microphone"].volume -= volumeChange },
@@ -75,7 +75,7 @@ const MicrophoneBox = () => Widget.EventBox({
 
 const VolumeIndicator = (monitor: number) => Widget.Box({
     child: Widget.EventBox({
-        className: "VolumeIndicator",
+        class_name: "VolumeIndicator",
         css: "padding-left: 1em; padding-right: 1em;",
         on_hover: () => App.openWindow(`volume-menu${monitor}`),
         on_hover_lost: () => App.closeWindow(`volume-menu${monitor}`),
@@ -96,7 +96,7 @@ const VolumeIndicator = (monitor: number) => Widget.Box({
 export const VolumeControl = (monitor: number) => Widget.Window({
     monitor: monitor,
     name: `volume-menu${monitor}`,
-    className: "VolumeControl",
+    class_name: "VolumeControl",
     anchor: ["top"],
     visible: false,
     child: Widget.Box({

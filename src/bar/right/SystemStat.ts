@@ -1,26 +1,25 @@
-import Box from "types/widgets/box";
-import Label from "types/widgets/label";
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 
 type SystemInfo = {
   type: string;
-  poll: (self: Label<unknown>) => void;
-  boxpoll: (self: Box<Label<unknown>, unknown>) => void;
+  poll: (self: Gtk.Label) => void;
+  boxpoll: (self: Gtk.Box) => void;
   label?: string;
-  tooltipText?: string;
+  tooltip_text?: string;
 
 }
 const Indicator = (props: SystemInfo) =>
   Widget.Box({
-    className: `SystemInfo ${props.type}`,
+    class_name: `SystemInfo ${props.type}`,
     vexpand: true,
     vpack: "center",
 
     children: [
       Widget.Label({
-        className: "type",
+        class_name: "type",
         label: props.type,
       }),
-      Widget.Label({ className: "value" })
+      Widget.Label({ class_name: "value" })
         .poll(2000, props.poll),
     ],
   }).poll(2000, props.boxpoll);
@@ -28,7 +27,7 @@ const Indicator = (props: SystemInfo) =>
 const cpu = {
   type: " ",
 
-  poll: (self: Label<unknown>) =>
+  poll: (self: Gtk.Label) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -37,7 +36,7 @@ const cpu = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self: Box<Label<unknown>, unknown>) =>
+  boxpoll: (self: Gtk.Box) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -46,7 +45,7 @@ const cpu = {
       .then((r) => {
         const mhz = r.split("\n").slice(4).map((value) => value.split(",")[0]);
         const freq = mhz.reduce((acc, e) => acc + Number(e), 0) / mhz.length;
-        self.tooltipText = Math.round(freq) + " MHz";
+        self.tooltip_text = Math.round(freq) + " MHz";
       })
       .catch((err) => print(err)),
 };
@@ -54,7 +53,7 @@ const cpu = {
 
 const ram = {
   type: " ",
-  poll: (self: Label<unknown>) =>
+  poll: (self: Gtk.Label) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -63,19 +62,19 @@ const ram = {
       .then((r) => (self.label = Math.round(Number(r)) + "%"))
       .catch((err) => print(err)),
 
-  boxpoll: (self: Box<Label<unknown>, unknown>) =>
+  boxpoll: (self: Gtk.Box) =>
     Utils.execAsync([
       "sh",
       "-c",
       "free --si -h | tail -2 | head -1 | awk '{print $3}'",
     ])
-      .then((r) => self.tooltipText = r)
+      .then((r) => self.tooltip_text = r)
       .catch((err) => print(err)),
 };
 
 const temperature: SystemInfo = {
   type: " ",
-  poll: (self: Label<unknown>) =>
+  poll: (self: Gtk.Label) =>
     Utils.execAsync([
       "sh",
       "-c",
@@ -85,7 +84,7 @@ const temperature: SystemInfo = {
     })
       .catch((err) => print(err)),
 
-  boxpoll: (self) => { },
+  boxpoll: () => { },
 
 
 }
@@ -93,10 +92,10 @@ const temperature: SystemInfo = {
 
 export default () =>
   Widget.EventBox({
-    onPrimaryClick: () => Utils.execAsync(["missioncenter"]),
+    on_primary_click: () => Utils.execAsync(["missioncenter"]),
 
     child: Widget.Box({
-      className: "system-info module",
+      class_name: "system-info module",
 
       children: [
         Indicator(temperature),
