@@ -35,10 +35,17 @@ const WifiSettings = () => {
                 Widget.Label({ label: network.wifi.bind("state") }),
                 Widget.Box({
                     children: [
-                        Widget.Switch({
-                            class_name: "WifiSwitch",
-                            on_activate: () => network.toggleWifi(),
-                            active: network.wifi.bind("enabled"),
+                        Widget.Button({
+                            class_name: "WifiToggleButton",
+                            on_clicked: () => {
+                                print("activate wifi")
+                                network.toggleWifi()
+                                print("activated wifi")
+                            },
+                            child: Widget.Switch({
+                                class_name: "WifiSwitch",
+                                active: network.wifi.bind("enabled"),
+                            }),
                         }),
                         Widget.Label({ label: "Toggle Wifi", css: "margin-left: 0.2em; margin-right: 2em;" }),
                         Widget.Button({
@@ -53,7 +60,7 @@ const WifiSettings = () => {
         })
     }
     catch (e) {
-        if(!(e instanceof TypeError)) {
+        if (!(e instanceof TypeError)) {
             print(e)
         }
         return Widget.Label({ label: "No Wifi device" })

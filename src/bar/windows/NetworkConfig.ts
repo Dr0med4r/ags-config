@@ -2,6 +2,7 @@ import Gtk from "types/@girs/gtk-3.0/gtk-3.0";
 import VPNSettings from "./NetworkConfig/VPNSettings";
 import WifiSettings from "./NetworkConfig/WifiSettings";
 
+const network = await Service.import("network")
 
 const connectionType = Variable("wifi")
 
@@ -23,7 +24,7 @@ export const Connections = (name: string, connections: () => Gtk.Widget[]) => Wi
     hscroll: "never",
     child: Widget.Box({
         vertical: true,
-        children: connections(),
+        children: network.wifi.bind("access_points").as(() => connections())
     })
 })
 

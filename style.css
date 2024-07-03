@@ -57,6 +57,9 @@ switch slider {
 .ScanButton {
 	background-color: @base02;
 }
+.WifiToggleButton {
+	background: none;
+}
 
 .Center > * {
 	margin: 0 5px;
