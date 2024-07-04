@@ -74,6 +74,25 @@ button:hover.WorkspaceButton {
 
 /* Right */
 
+.Brightness {
+	padding: 4px 0px;
+	margin: 0 0.2em;
+}
+
+.Brightness trough {
+	min-width: 10px;
+	min-height: 10px;
+	background-color: @base01;
+}
+
+.Brightness trough highlight {
+	background-color: @base05
+}
+
+.Brightness trough slider {
+	background-color: transparent;
+}
+
 .BatteryProgress {
 	min-width: 18px;
 	min-height: 18px;
@@ -92,6 +111,7 @@ button:hover.WorkspaceButton {
 .SystemTrayItem {
 	padding:0.1em;
 }
+
 
 
 /* Windows */
