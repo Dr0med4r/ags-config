@@ -1,9 +1,9 @@
 import Workspaces from "./bar/Workspaces"
 import VolumeIndicator from "./bar/Volume"
-import SystemStat from "./bar/right/SystemStat"
-import Systemtray from "./bar/right/Systemtray"
 import Clock from "./bar/Clock"
 import NetworkIndicator from "./bar/Network"
+import System from "./bar/System"
+import Systemtray from "./bar/Systemtray"
 
 
 
@@ -29,7 +29,7 @@ const Right = (monitor) => Widget.Box({
     hpack: "end",
     class_name: "Right",
     children: [
-        SystemStat(),
+        System(),
         Clock(),
         Systemtray(),
     ]

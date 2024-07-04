@@ -7,6 +7,17 @@
 	box-shadow: none;
 	font-size: 13;
 }
+
+switch {
+	background-color: @base02;
+}
+
+switch slider {
+	background-color: @base04;
+}
+
+/* Bar */
+
 window {
 	background: transparent;
 }
@@ -19,7 +30,9 @@ window {
 .SystemTray,
 .NetworkConfig,
 .NetworkIndicator,
-tooltip {
+tooltip,
+.SystemInfo.module
+{
 	background-color: @base00;
 	color: @base05;
 	border-radius: 10px;
@@ -27,39 +40,23 @@ tooltip {
 	margin: 0em 5px;
 }
 
-.VPNSwitch {
-	background-color: @base02;
-}
-.VPNSwitch:checked {
-	background-color: @base05;
+
+/* Left */
+
+.WorkspaceButton {
+	padding: 0em 0.75em;
 }
 
-* > .ConnectionTypes,
-* > .ConnectionSettings {
-	padding: 0.5em;
+.WorkspaceButton.active:not(:hover) {
+	box-shadow: inset 0 -3px @base05;
 }
-.ConnectionTypes *{
-	padding: 0.2em;
-	margin: 0.1em;
-	border-radius: 10px;
-	background-color: @base02;
+
+button:hover.WorkspaceButton {
+	box-shadow: inset 0 -3px @base06;
 }
-.WifiConnections, .VPNConnections {
-	min-height: 10em;
-	min-width: 20em;
-}
-switch {
-	background-color: @base02;
-}
-switch slider {
-	background-color: @base04;
-}
-.ScanButton {
-	background-color: @base02;
-}
-.WifiToggleButton {
-	background: none;
-}
+
+
+/* Center */
 
 .Center > * {
 	margin: 0 5px;
@@ -70,12 +67,43 @@ switch slider {
 	padding: 0;
 }
 
+.NetworkIndicator > * {
+	margin: 0 5px;
+	padding: 0;
+}
+
+/* Right */
+
+.BatteryProgress {
+	min-width: 18px;
+	min-height: 18px;
+	font-size: 2px;
+}
+
+.charging {
+	color: @base0E;
+}
+
+.SystemInfoIndicator {
+	margin: 0px;
+	padding: 0.0em 0.3em;
+}
+
+.SystemTrayItem {
+	padding:0.1em;
+}
+
+
+/* Windows */
 
 .VolumeControl,
 .NetworkConfig {
 	border: 2px solid @base0D;
 	min-width: 10em;
 }
+
+
+/* VolumeWindow */
 
 .VolumeControl trough {
 	margin: 1em;
@@ -95,23 +123,37 @@ switch slider {
 }
 
 
+/* NetworkWindow */
 
-.SystemTrayItem {
-	padding:0.1em;
+.VPNSwitch {
+	background-color: @base02;
+}
+.VPNSwitch:checked {
+	background-color: @base05;
 }
 
-
-
-.WorkspaceButton {
-	padding: 0em 0.75em;
+* > .ConnectionTypes,
+* > .ConnectionSettings {
+	padding: 0.5em;
 }
 
-button.active:not(:hover) {
-	box-shadow: inset 0 -3px @base05;
+.ConnectionTypes *{
+	padding: 0.2em;
+	margin: 0.1em;
+	border-radius: 10px;
+	background-color: @base02;
 }
 
-button:hover.WorkspaceButton {
-	box-shadow: inset 0 -3px @base06;
+.WifiConnections, .VPNConnections {
+	min-height: 10em;
+	min-width: 20em;
 }
 
+.ScanButton {
+	background-color: @base02;
+}
+
+.WifiToggleButton {
+	background: none;
+}
 

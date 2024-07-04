@@ -10,7 +10,7 @@ type SystemInfo = {
 }
 const Indicator = (props: SystemInfo) =>
   Widget.Box({
-    class_name: `SystemInfo ${props.type}`,
+    class_name: `SystemInfoIndicator ${props.type}`,
     vexpand: true,
     vpack: "center",
 
@@ -24,7 +24,7 @@ const Indicator = (props: SystemInfo) =>
     ],
   }).poll(2000, props.boxpoll);
 
-const cpu = {
+export const cpu = {
   type: " ",
 
   poll: (self: Gtk.Label) =>
@@ -51,7 +51,7 @@ const cpu = {
 };
 
 
-const ram = {
+export const ram = {
   type: " ",
   poll: (self: Gtk.Label) =>
     Utils.execAsync([
@@ -72,7 +72,7 @@ const ram = {
       .catch((err) => print(err)),
 };
 
-const temperature: SystemInfo = {
+export const temperature: SystemInfo = {
   type: " ",
   poll: (self: Gtk.Label) =>
     Utils.execAsync([
@@ -90,17 +90,4 @@ const temperature: SystemInfo = {
 }
 
 
-export default () =>
-  Widget.EventBox({
-    on_primary_click: () => Utils.execAsync(["missioncenter"]),
-
-    child: Widget.Box({
-      class_name: "system-info module",
-
-      children: [
-        Indicator(temperature),
-        Indicator(cpu),
-        Indicator(ram),
-      ],
-    }),
-  });
+export default Indicator
