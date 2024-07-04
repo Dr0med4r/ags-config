@@ -99,6 +99,10 @@ button:hover.WorkspaceButton {
 	font-size: 2px;
 }
 
+.critical:not(.charging) {
+	color: @base0F;
+}
+
 .charging {
 	color: @base0E;
 }
