@@ -39,10 +39,9 @@ const ConnectionSettings = () => Widget.Stack({
 
 })
 
-const NetworkConfig = (monitor: number) => Widget.Window({
+const NetworkConfig = () => Widget.Window({
     visible: false,
-    monitor,
-    name: `networkConfig${monitor}`,
+    name: `networkConfig`,
     anchor: ["top"],
     class_name: "NetworkConfig",
     child: Widget.Box({

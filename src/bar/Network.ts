@@ -16,9 +16,9 @@ const WiredIndicator = () => Widget.Icon({
     icon: network.wired.bind('icon_name'),
 })
 
-const NetworkIndicator = (monitor: number) => Widget.EventBox({
+const NetworkIndicator = () => Widget.EventBox({
     on_primary_click: () => {
-        const window = `networkConfig${monitor}`
+        const window = `networkConfig`
         App.toggleWindow(window)
     },
     child: Widget.Stack({

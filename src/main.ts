@@ -1,3 +1,4 @@
+import Gtk from "types/@girs/gtk-3.0/gtk-3.0"
 import Bar from "./Bar"
 import { VolumeControl } from "./bar/Volume"
 import NetworkConfig from "./bar/windows/NetworkConfig"
@@ -9,15 +10,15 @@ Utils.monitorFile(`${App.configDir}`, () => {
     App.applyCss(css)
 })
 
-function forAllMonitors(widget) {
-    return Array.from({length: hyprland.monitors.length}, (_, i) => widget(i))
+function forAllMonitors(widget: (i: number) => Gtk.Window) {
+    return Array.from({ length: hyprland.monitors.length }, (_, i) => widget(i))
 }
 
 App.config({
     style: "./style.css",
     windows: [
         ...forAllMonitors(Bar),
-        ...forAllMonitors(VolumeControl),
-        ...forAllMonitors(NetworkConfig),
+        NetworkConfig(),
+        VolumeControl(),
     ],
 })

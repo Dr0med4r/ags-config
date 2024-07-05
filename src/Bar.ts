@@ -7,7 +7,7 @@ import Systemtray from "./bar/Systemtray"
 
 
 
-const Left = (monitor) => Widget.Box({
+const Left = () => Widget.Box({
     hpack: "start",
     class_name: "Left",
     children: [
@@ -15,17 +15,17 @@ const Left = (monitor) => Widget.Box({
     ],
 })
 
-const Center = (monitor: number) => Widget.Box({
+const Center = () => Widget.Box({
     class_name: "Center",
     children: [
-        VolumeIndicator(monitor),
-        NetworkIndicator(monitor),
+        VolumeIndicator(),
+        NetworkIndicator(),
     ],
 })
 
 
 
-const Right = (monitor) => Widget.Box({
+const Right = () => Widget.Box({
     hpack: "end",
     class_name: "Right",
     children: [
@@ -41,8 +41,8 @@ export default (monitor: number) => Widget.Window({
     anchor: ['top', 'left', 'right'],
     exclusivity: 'exclusive',
     child: Widget.CenterBox({
-        start_widget: Left(monitor),
-        center_widget: Center(monitor),
-        end_widget: Right(monitor),
+        start_widget: Left(),
+        center_widget: Center(),
+        end_widget: Right(),
     }),
 })

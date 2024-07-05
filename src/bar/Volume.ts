@@ -73,14 +73,14 @@ const MicrophoneBox = () => Widget.EventBox({
     })
 })
 
-const VolumeIndicator = (monitor: number) => Widget.Box({
+const VolumeIndicator = () => Widget.Box({
     child: Widget.EventBox({
         class_name: "VolumeIndicator",
         css: "padding-left: 1em; padding-right: 1em;",
-        on_hover: () => App.openWindow(`volume-menu${monitor}`),
-        on_hover_lost: () => App.closeWindow(`volume-menu${monitor}`),
+        on_hover: () => App.openWindow(`volume-menu`),
+        on_hover_lost: () => App.closeWindow(`volume-menu`),
         on_secondary_click: () => {
-            App.toggleWindow(`volume-menu${monitor}`)
+            App.toggleWindow(`volume-menu`)
         },
         child: Widget.Box({
             children: [
@@ -93,9 +93,8 @@ const VolumeIndicator = (monitor: number) => Widget.Box({
 
 
 
-export const VolumeControl = (monitor: number) => Widget.Window({
-    monitor: monitor,
-    name: `volume-menu${monitor}`,
+export const VolumeControl = () => Widget.Window({
+    name: `volume-menu`,
     class_name: "VolumeControl",
     anchor: ["top"],
     visible: false,
