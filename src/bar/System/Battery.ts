@@ -5,7 +5,7 @@ const BatteryProgress = () => Widget.CircularProgress({
     value: battery.bind('percent').as(p => p > 0 ? p / 100 : 0),
     class_name: "BatteryProgress",
     start_at: 0.75,
-    inverted: true,
+    inverted: false,
 })
     .hook(battery, (self) => {
         const critical_percent = 0.15
